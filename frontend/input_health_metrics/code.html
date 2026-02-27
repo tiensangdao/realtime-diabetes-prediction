@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DiabetesGuard - Input Health Metrics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2e87ad",
+                        "primary-content": "#ffffff",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#131b1f",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1e2930",
+                        "text-main": "#121517",
+                        "text-secondary": "#677b83",
+                        "success": "#34a853",
+                        "warning": "#fbbc04",
+                        "danger": "#ea4335",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main antialiased selection:bg-primary/30 selection:text-primary">
+<div class="relative mx-auto flex h-full min-h-screen w-full max-w-md flex-col bg-background-light dark:bg-background-dark shadow-xl overflow-x-hidden">
+<!-- Header -->
+<header class="sticky top-0 z-50 flex items-center justify-between bg-surface-light dark:bg-surface-dark px-4 py-3 shadow-sm">
+<button aria-label="Go back" class="flex size-10 items-center justify-center rounded-full text-text-main dark:text-white hover:bg-background-light dark:hover:bg-background-dark transition-colors">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<h1 class="flex-1 text-center text-lg font-bold leading-tight text-text-main dark:text-white">Nhập chỉ số sức khỏe</h1>
+<button aria-label="Select date" class="flex size-10 items-center justify-center rounded-full text-primary hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-2xl">calendar_month</span>
+</button>
+</header>
+<!-- Date Banner -->
+<div class="bg-primary/10 px-4 py-3 text-center">
+<p class="text-sm font-medium text-primary dark:text-primary-400">Thứ Ba, 24/10/2023 - 08:30</p>
+</div>
+<main class="flex-1 space-y-6 px-4 py-6 pb-32">
+<!-- Input Method Toggle -->
+<div class="flex rounded-xl bg-surface-light dark:bg-surface-dark p-1.5 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+<label class="relative flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-medium transition-all has-[:checked]:bg-primary has-[:checked]:text-white has-[:checked]:shadow-md">
+<input checked="" class="peer sr-only" name="input_method" type="radio" value="manual"/>
+<span class="material-symbols-outlined text-lg">edit</span>
+<span>Nhập tay</span>
+</label>
+<label class="relative flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-medium text-text-secondary transition-all has-[:checked]:bg-primary has-[:checked]:text-white has-[:checked]:shadow-md hover:bg-background-light dark:hover:bg-surface-dark/50">
+<input class="peer sr-only" name="input_method" type="radio" value="iot"/>
+<span class="material-symbols-outlined text-lg">sensors</span>
+<span>Thiết bị IoT</span>
+</label>
+</div>
+<!-- Glucose Card -->
+<section class="rounded-2xl bg-surface-light dark:bg-surface-dark p-5 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+<div class="mb-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="flex size-8 items-center justify-center rounded-full bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400">
+<span class="material-symbols-outlined text-lg">bloodtype</span>
+</div>
+<h3 class="font-bold text-text-main dark:text-white">Đường huyết (Glucose)</h3>
+</div>
+<span class="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">mg/dL</span>
+</div>
+<div class="relative mb-6">
+<input class="w-full rounded-xl border-2 border-primary/20 bg-background-light dark:bg-black/20 px-4 py-5 text-center text-4xl font-bold text-primary placeholder-primary/30 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10 dark:text-primary-400 dark:placeholder-primary/30" placeholder="000" type="number" value="280"/>
+<p class="mt-2 text-center text-xs font-medium text-danger">Cao hơn mức bình thường (70-140 mg/dL)</p>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<label class="flex cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border border-transparent bg-background-light dark:bg-background-dark p-2 text-center transition-all has-[:checked]:border-primary has-[:checked]:bg-primary/5 has-[:checked]:text-primary">
+<input class="sr-only" name="glucose_timing" type="radio" value="fasting"/>
+<span class="material-symbols-outlined text-xl">wb_twilight</span>
+<span class="text-xs font-medium">Lúc đói</span>
+</label>
+<label class="flex cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border border-transparent bg-background-light dark:bg-background-dark p-2 text-center transition-all has-[:checked]:border-primary has-[:checked]:bg-primary/5 has-[:checked]:text-primary">
+<input class="sr-only" name="glucose_timing" type="radio" value="before_meal"/>
+<span class="material-symbols-outlined text-xl">soup_kitchen</span>
+<span class="text-xs font-medium">Trước ăn</span>
+</label>
+<label class="flex cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border border-primary bg-primary/5 p-2 text-center text-primary transition-all has-[:checked]:border-primary has-[:checked]:bg-primary/5 has-[:checked]:text-primary">
+<input checked="" class="sr-only" name="glucose_timing" type="radio" value="after_meal"/>
+<span class="material-symbols-outlined text-xl">restaurant</span>
+<span class="text-xs font-medium">Sau ăn 2h</span>
+</label>
+</div>
+</section>
+<!-- Blood Pressure Card -->
+<section class="rounded-2xl bg-surface-light dark:bg-surface-dark p-5 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+<div class="mb-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="flex size-8 items-center justify-center rounded-full bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</div>
+<h3 class="font-bold text-text-main dark:text-white">Huyết áp (mmHg)</h3>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex-1">
+<label class="mb-1.5 block text-xs font-medium text-text-secondary">Tâm thu (SYS)</label>
+<input class="w-full rounded-xl border border-gray-200 bg-background-light dark:bg-black/20 px-3 py-3 text-center text-2xl font-bold text-text-main focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 dark:border-white/10 dark:text-white" type="number" value="145"/>
+</div>
+<div class="mt-5 text-2xl font-light text-text-secondary">/</div>
+<div class="flex-1">
+<label class="mb-1.5 block text-xs font-medium text-text-secondary">Tâm trương (DIA)</label>
+<input class="w-full rounded-xl border border-gray-200 bg-background-light dark:bg-black/20 px-3 py-3 text-center text-2xl font-bold text-text-main focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 dark:border-white/10 dark:text-white" type="number" value="92"/>
+</div>
+</div>
+</section>
+<!-- Other Metrics Grid -->
+<div class="grid grid-cols-2 gap-4">
+<!-- Heart Rate -->
+<div class="rounded-2xl bg-surface-light dark:bg-surface-dark p-4 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+<div class="mb-2 flex items-center gap-2 text-text-secondary">
+<span class="material-symbols-outlined text-base">monitor_heart</span>
+<span class="text-xs font-medium">Nhịp tim (BPM)</span>
+</div>
+<input class="w-full rounded-lg border-0 bg-background-light dark:bg-black/20 py-2 text-center text-xl font-bold text-text-main focus:ring-2 focus:ring-primary/20 dark:text-white" placeholder="--" type="number" value="78"/>
+</div>
+<!-- Weight -->
+<div class="rounded-2xl bg-surface-light dark:bg-surface-dark p-4 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+<div class="mb-2 flex items-center gap-2 text-text-secondary">
+<span class="material-symbols-outlined text-base">scale</span>
+<span class="text-xs font-medium">Cân nặng (kg)</span>
+</div>
+<input class="w-full rounded-lg border-0 bg-background-light dark:bg-black/20 py-2 text-center text-xl font-bold text-text-main focus:ring-2 focus:ring-primary/20 dark:text-white" placeholder="--" type="number" value="65.5"/>
+</div>
+<!-- HbA1c -->
+<div class="col-span-2 rounded-2xl bg-surface-light dark:bg-surface-dark p-4 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-text-secondary">lab_profile</span>
+<span class="text-sm font-bold text-text-main dark:text-white">HbA1c (%)</span>
+</div>
+<input class="w-24 rounded-lg border-0 bg-background-light dark:bg-black/20 py-2 text-center text-lg font-bold text-text-main focus:ring-2 focus:ring-primary/20 dark:text-white" placeholder="--" step="0.1" type="number"/>
+</div>
+</div>
+</div>
+<!-- Tip Box -->
+<div class="flex items-start gap-3 rounded-xl bg-primary/10 p-4">
+<span class="material-symbols-outlined mt-0.5 text-primary">lightbulb</span>
+<p class="text-sm leading-relaxed text-text-main dark:text-white">
+<span class="font-bold text-primary">Lời khuyên:</span> Hãy đo đường huyết vào cùng một thời điểm mỗi ngày để có kết quả chính xác nhất.
+                </p>
+</div>
+</main>
+<!-- Fixed Bottom Action -->
+<div class="fixed bottom-0 left-0 right-0 mx-auto w-full max-w-md bg-surface-light/80 p-4 backdrop-blur-md dark:bg-surface-dark/80">
+<button class="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary to-[#4ab3d6] py-4 text-lg font-bold text-white shadow-lg shadow-primary/30 transition-transform active:scale-[0.98]">
+<span class="material-symbols-outlined">search</span>
+                DỰ ĐOÁN NGAY
+            </button>
+</div>
+</div>
+</body></html>

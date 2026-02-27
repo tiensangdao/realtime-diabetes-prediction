@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DiabetesGuard - Lịch sử sức khỏe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2e87ad",
+                        "primary-content": "#ffffff",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#131b1f",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1e2a30",
+                        "text-main": "#121517",
+                        "text-secondary": "#677b83",
+                        "accent-success": "#22c55e",
+                        "accent-warning": "#f59e0b",
+                        "accent-danger": "#ef4444",
+                    },
+                    fontFamily: {
+                        display: ["Lexend", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        lg: "1rem",
+                        xl: "1.5rem",
+                        full: "9999px",
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-gray-100 min-h-screen flex flex-col overflow-x-hidden">
+<!-- Header -->
+<header class="flex items-center justify-between px-4 pt-12 pb-4 bg-surface-light dark:bg-surface-dark sticky top-0 z-10 border-b border-gray-100 dark:border-gray-800">
+<h2 class="text-xl font-bold leading-tight tracking-[-0.015em] flex-1 text-slate-900 dark:text-white">Lịch sử sức khỏe</h2>
+<button class="flex items-center justify-center h-10 w-10 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined" style="font-size: 24px;">tune</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col gap-6 pb-24">
+<!-- Time Filter Chips -->
+<div class="flex gap-3 px-4 pt-4 overflow-x-auto no-scrollbar scroll-smooth">
+<button class="flex h-9 shrink-0 items-center justify-center px-4 rounded-full bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-700 text-slate-600 dark:text-slate-300 text-sm font-medium whitespace-nowrap hover:border-primary hover:text-primary transition-all">
+                7 ngày
+            </button>
+<button class="flex h-9 shrink-0 items-center justify-center px-4 rounded-full bg-primary text-white text-sm font-medium whitespace-nowrap shadow-lg shadow-primary/30">
+                30 ngày
+            </button>
+<button class="flex h-9 shrink-0 items-center justify-center px-4 rounded-full bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-700 text-slate-600 dark:text-slate-300 text-sm font-medium whitespace-nowrap hover:border-primary hover:text-primary transition-all">
+                3 tháng
+            </button>
+<button class="flex h-9 shrink-0 items-center justify-center px-4 rounded-full bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-700 text-slate-600 dark:text-slate-300 text-sm font-medium whitespace-nowrap hover:border-primary hover:text-primary transition-all">
+                Tùy chọn
+            </button>
+</div>
+<!-- Chart Section -->
+<div class="px-4">
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-5 shadow-sm border border-gray-100 dark:border-gray-800">
+<div class="flex flex-col gap-1 mb-6">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Biểu đồ đường huyết (Trung bình)</p>
+<div class="flex items-end gap-2">
+<p class="text-slate-900 dark:text-white text-3xl font-bold leading-none">120 <span class="text-base font-normal text-slate-500 dark:text-slate-400">mg/dL</span></p>
+<span class="inline-flex items-center text-xs font-bold text-accent-success bg-accent-success/10 px-2 py-0.5 rounded-full mb-1">
+<span class="material-symbols-outlined text-[14px] mr-1">trending_down</span> -2%
+                        </span>
+</div>
+</div>
+<div class="relative h-[200px] w-full">
+<!-- Chart Background Zones -->
+<div class="absolute inset-0 flex flex-col opacity-10 rounded-lg overflow-hidden">
+<div class="h-[25%] bg-accent-danger w-full"></div>
+<div class="h-[15%] bg-accent-warning w-full"></div>
+<div class="h-[35%] bg-accent-success w-full"></div>
+<div class="h-[25%] bg-accent-danger w-full"></div>
+</div>
+<!-- SVG Chart Line -->
+<svg class="absolute inset-0 w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 100 100">
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#2e87ad" stop-opacity="0.4"></stop>
+<stop offset="100%" stop-color="#2e87ad" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Area fill -->
+<path d="M0,60 Q10,55 20,65 T40,50 T60,45 T80,55 T100,40 V100 H0 Z" fill="url(#chartGradient)"></path>
+<!-- Line -->
+<path d="M0,60 Q10,55 20,65 T40,50 T60,45 T80,55 T100,40" fill="none" stroke="#2e87ad" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<!-- Points -->
+<circle cx="20" cy="65" fill="#fff" r="1.5" stroke="#2e87ad" stroke-width="1.5"></circle>
+<circle cx="40" cy="50" fill="#fff" r="1.5" stroke="#2e87ad" stroke-width="1.5"></circle>
+<circle cx="60" cy="45" fill="#fff" r="1.5" stroke="#2e87ad" stroke-width="1.5"></circle>
+<circle cx="80" cy="55" fill="#fff" r="1.5" stroke="#2e87ad" stroke-width="1.5"></circle>
+</svg>
+<!-- Y-axis labels (rough approximation for visuals) -->
+<div class="absolute left-0 top-0 h-full flex flex-col justify-between text-[10px] text-slate-400 pl-1 py-1 pointer-events-none">
+<span>180</span>
+<span>70</span>
+</div>
+</div>
+<!-- X-axis labels -->
+<div class="flex justify-between mt-2 pt-2 border-t border-gray-100 dark:border-gray-800">
+<span class="text-xs text-slate-400">1/10</span>
+<span class="text-xs text-slate-400">5/10</span>
+<span class="text-xs text-slate-400">10/10</span>
+<span class="text-xs text-slate-400">15/10</span>
+<span class="text-xs text-slate-400">20/10</span>
+<span class="text-xs text-slate-400">25/10</span>
+<span class="text-xs text-slate-400">30/10</span>
+</div>
+</div>
+</div>
+<!-- Stats Summary -->
+<div class="grid grid-cols-2 gap-3 px-4">
+<div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col gap-1">
+<span class="text-slate-500 dark:text-slate-400 text-xs font-medium">Trung bình</span>
+<span class="text-slate-900 dark:text-white text-xl font-bold">120</span>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col gap-1">
+<span class="text-slate-500 dark:text-slate-400 text-xs font-medium">Cao nhất</span>
+<span class="text-slate-900 dark:text-white text-xl font-bold text-accent-danger">180</span>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col gap-1">
+<span class="text-slate-500 dark:text-slate-400 text-xs font-medium">Thấp nhất</span>
+<span class="text-slate-900 dark:text-white text-xl font-bold text-accent-warning">85</span>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col gap-1 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-2 opacity-10">
+<span class="material-symbols-outlined text-primary text-4xl">check_circle</span>
+</div>
+<span class="text-slate-500 dark:text-slate-400 text-xs font-medium">Trong khoảng</span>
+<span class="text-slate-900 dark:text-white text-xl font-bold text-accent-success">85%</span>
+</div>
+</div>
+<!-- History List Header -->
+<div class="px-4 pt-2">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Chi tiết lịch sử</h3>
+</div>
+<!-- History List -->
+<div class="flex flex-col gap-3 px-4">
+<!-- Item 1 -->
+<div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 rounded-full bg-accent-success/10 flex items-center justify-center text-accent-success">
+<span class="material-symbols-outlined">water_drop</span>
+</div>
+<div class="flex flex-col">
+<span class="text-slate-900 dark:text-white font-semibold text-sm">Sau bữa sáng</span>
+<span class="text-slate-500 dark:text-slate-400 text-xs">Hôm nay, 08:30</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-slate-900 dark:text-white font-bold text-lg">118 <span class="text-xs font-normal text-slate-500">mg/dL</span></span>
+<span class="text-[10px] font-bold text-accent-success bg-accent-success/10 px-2 py-0.5 rounded-full">Ổn định</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 rounded-full bg-accent-warning/10 flex items-center justify-center text-accent-warning">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<div class="flex flex-col">
+<span class="text-slate-900 dark:text-white font-semibold text-sm">Trước bữa tối</span>
+<span class="text-slate-500 dark:text-slate-400 text-xs">Hôm qua, 18:00</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-slate-900 dark:text-white font-bold text-lg">95 <span class="text-xs font-normal text-slate-500">mg/dL</span></span>
+<span class="text-[10px] font-bold text-accent-warning bg-accent-warning/10 px-2 py-0.5 rounded-full">Hơi thấp</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 rounded-full bg-accent-danger/10 flex items-center justify-center text-accent-danger">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div class="flex flex-col">
+<span class="text-slate-900 dark:text-white font-semibold text-sm">Đột xuất</span>
+<span class="text-slate-500 dark:text-slate-400 text-xs">Hôm qua, 14:20</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-slate-900 dark:text-white font-bold text-lg">185 <span class="text-xs font-normal text-slate-500">mg/dL</span></span>
+<span class="text-[10px] font-bold text-accent-danger bg-accent-danger/10 px-2 py-0.5 rounded-full">Cao</span>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 rounded-full bg-accent-success/10 flex items-center justify-center text-accent-success">
+<span class="material-symbols-outlined">bedtime</span>
+</div>
+<div class="flex flex-col">
+<span class="text-slate-900 dark:text-white font-semibold text-sm">Trước khi ngủ</span>
+<span class="text-slate-500 dark:text-slate-400 text-xs">28/10, 22:00</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-slate-900 dark:text-white font-bold text-lg">110 <span class="text-xs font-normal text-slate-500">mg/dL</span></span>
+<span class="text-[10px] font-bold text-accent-success bg-accent-success/10 px-2 py-0.5 rounded-full">Ổn định</span>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 rounded-full bg-accent-success/10 flex items-center justify-center text-accent-success">
+<span class="material-symbols-outlined">wb_sunny</span>
+</div>
+<div class="flex flex-col">
+<span class="text-slate-900 dark:text-white font-semibold text-sm">Sáng sớm</span>
+<span class="text-slate-500 dark:text-slate-400 text-xs">28/10, 06:00</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-slate-900 dark:text-white font-bold text-lg">105 <span class="text-xs font-normal text-slate-500">mg/dL</span></span>
+<span class="text-[10px] font-bold text-accent-success bg-accent-success/10 px-2 py-0.5 rounded-full">Ổn định</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<div class="fixed bottom-0 left-0 w-full border-t border-gray-100 dark:border-gray-800 bg-surface-light dark:bg-surface-dark pb-6 pt-2 px-4 shadow-lg z-50">
+<div class="flex justify-between items-center max-w-lg mx-auto">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">home</span>
+<span class="text-[10px] font-medium">Trang chủ</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">show_chart</span>
+<span class="text-[10px] font-medium">Theo dõi</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary relative" href="#">
+<div class="absolute -top-12 bg-primary rounded-full p-3 shadow-lg shadow-primary/30 border-4 border-white dark:border-background-dark transform transition-transform hover:-translate-y-1">
+<span class="material-symbols-outlined text-white text-2xl">history</span>
+</div>
+<div class="h-6"></div> <!-- Spacer for absolute icon -->
+<span class="text-[10px] font-medium mt-1">Lịch sử</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">forum</span>
+<span class="text-[10px] font-medium">Tư vấn</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">settings</span>
+<span class="text-[10px] font-medium">Cài đặt</span>
+</a>
+</div>
+</div>
+</body></html>

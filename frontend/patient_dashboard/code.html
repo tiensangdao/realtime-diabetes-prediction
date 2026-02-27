@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DiabetesGuard - Patient Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2e87ad",
+                        "primary-dark": "#1a5c7a",
+                        secondary: "#E67E22",
+                        danger: "#e74c3c",
+                        warning: "#f1c40f",
+                        success: "#2ecc71",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#131b1f",
+                    },
+                    fontFamily: {
+                        display: ["Lexend", "sans-serif"],
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom gauge styles */
+        .gauge-container {
+            position: relative;
+            width: 160px;
+            height: 80px; /* Half circle height */
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .gauge-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 15px solid #e2e8f0;
+            border-bottom-color: transparent !important;
+            border-left-color: transparent !important; /* Make it a semi-circle visually depending on rotation, but here we just hide bottom */
+            box-sizing: border-box;
+        }
+        .gauge-value {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 15px solid #E67E22;
+            border-bottom-color: transparent !important;
+            border-right-color: transparent !important;
+            transform: rotate(-45deg); /* Adjust based on percentage */
+            box-sizing: border-box;
+            z-index: 10;
+        }
+        /* Hide bottom half */
+        .gauge-mask {
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 160px;
+            height: 80px;
+            background-color: white; 
+            z-index: 20;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased selection:bg-primary/20">
+<div class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto bg-white dark:bg-slate-900 shadow-2xl">
+<!-- Header Section -->
+<div class="relative bg-gradient-to-br from-primary to-primary-dark pb-16 pt-12 px-6 rounded-b-[2.5rem] shadow-lg">
+<div class="flex items-center justify-between mb-6">
+<div class="flex flex-col">
+<p class="text-blue-100 text-sm font-medium mb-1">Thứ Ba, 24 Tháng 10</p>
+<h1 class="text-white text-2xl font-bold tracking-tight">Xin chào, Nguyễn Văn A 👋</h1>
+</div>
+<button class="relative p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors backdrop-blur-sm">
+<span class="material-symbols-outlined text-white">notifications</span>
+<span class="absolute top-2 right-2 block h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-primary"></span>
+</button>
+</div>
+<!-- Risk Card (Floating) -->
+<div class="absolute left-6 right-6 -bottom-24 bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 flex flex-col items-center">
+<h2 class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider mb-4">Mức độ rủi ro</h2>
+<div class="relative w-40 h-24 flex justify-center overflow-hidden mb-2">
+<!-- Simple CSS Half Gauge representation -->
+<div class="w-40 h-40 rounded-full border-[12px] border-slate-100 dark:border-slate-700 absolute top-0 left-0 box-border"></div>
+<div class="w-40 h-40 rounded-full border-[12px] border-transparent border-t-secondary border-l-secondary absolute top-0 left-0 box-border rotate-[45deg]" style="transform: rotate(45deg);"></div>
+<div class="absolute bottom-0 text-center w-full">
+<span class="text-4xl font-bold text-slate-800 dark:text-white">82%</span>
+</div>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-sm font-bold border border-secondary/20">CAO ⚠️</span>
+</div>
+<p class="text-slate-400 dark:text-slate-500 text-xs font-medium">Cập nhật lúc 14:32 hôm nay</p>
+</div>
+</div>
+<!-- Spacer for the floating card -->
+<div class="h-28"></div>
+<!-- Quick Stats Section -->
+<div class="px-6 py-4">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-slate-800 dark:text-slate-100 text-lg font-bold">Chỉ số nhanh</h3>
+<a class="text-primary text-sm font-medium hover:underline" href="#">Chi tiết</a>
+</div>
+<div class="grid grid-cols-3 gap-3">
+<!-- Card 1: Glucose -->
+<div class="bg-white dark:bg-slate-800 rounded-xl p-3 shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col items-center justify-center gap-1 text-center">
+<div class="h-8 w-8 rounded-full bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-danger mb-1">
+<span class="material-symbols-outlined text-[20px]">water_drop</span>
+</div>
+<span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Glucose</span>
+<span class="text-lg font-bold text-slate-800 dark:text-slate-100">280</span>
+<span class="text-[10px] text-slate-400">mg/dL</span>
+<span class="text-[10px] font-bold text-danger bg-danger/10 px-1.5 py-0.5 rounded">+High</span>
+</div>
+<!-- Card 2: BP -->
+<div class="bg-white dark:bg-slate-800 rounded-xl p-3 shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col items-center justify-center gap-1 text-center">
+<div class="h-8 w-8 rounded-full bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center text-secondary mb-1">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</div>
+<span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Huyết áp</span>
+<span class="text-lg font-bold text-slate-800 dark:text-slate-100">145/92</span>
+<span class="text-[10px] text-slate-400">mmHg</span>
+<span class="text-[10px] font-bold text-secondary bg-secondary/10 px-1.5 py-0.5 rounded">+Mod</span>
+</div>
+<!-- Card 3: HbA1c -->
+<div class="bg-white dark:bg-slate-800 rounded-xl p-3 shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col items-center justify-center gap-1 text-center">
+<div class="h-8 w-8 rounded-full bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center text-secondary mb-1">
+<span class="material-symbols-outlined text-[20px]">science</span>
+</div>
+<span class="text-xs text-slate-500 dark:text-slate-400 font-medium">HbA1c</span>
+<span class="text-lg font-bold text-slate-800 dark:text-slate-100">9.2%</span>
+<span class="text-[10px] text-slate-400">Avg</span>
+<span class="text-[10px] font-bold text-secondary bg-secondary/10 px-1.5 py-0.5 rounded">+Mod</span>
+</div>
+</div>
+</div>
+<!-- Complications Breakdown -->
+<div class="px-6 py-2 pb-6">
+<h3 class="text-slate-800 dark:text-slate-100 text-lg font-bold mb-4">Phân tích biến chứng</h3>
+<div class="flex flex-col gap-3">
+<!-- Item 1: Kidneys -->
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl flex items-center gap-4">
+<div class="bg-white dark:bg-slate-700 p-2 rounded-lg shadow-sm text-danger">
+<span class="material-symbols-outlined">nephrology</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Thận</span>
+<span class="text-sm font-bold text-danger">70%</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+<div class="bg-danger h-2 rounded-full" style="width: 70%"></div>
+</div>
+</div>
+</div>
+<!-- Item 2: Retina -->
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl flex items-center gap-4">
+<div class="bg-white dark:bg-slate-700 p-2 rounded-lg shadow-sm text-warning">
+<span class="material-symbols-outlined">visibility</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Võng mạc</span>
+<span class="text-sm font-bold text-warning">48%</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+<div class="bg-warning h-2 rounded-full" style="width: 48%"></div>
+</div>
+</div>
+</div>
+<!-- Item 3: Heart -->
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl flex items-center gap-4">
+<div class="bg-white dark:bg-slate-700 p-2 rounded-lg shadow-sm text-secondary">
+<span class="material-symbols-outlined">cardiology</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Tim mạch</span>
+<span class="text-sm font-bold text-secondary">55%</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+<div class="bg-secondary h-2 rounded-full" style="width: 55%"></div>
+</div>
+</div>
+</div>
+<!-- Item 4: Nerves -->
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl flex items-center gap-4">
+<div class="bg-white dark:bg-slate-700 p-2 rounded-lg shadow-sm text-success">
+<span class="material-symbols-outlined">neurology</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Thần kinh</span>
+<span class="text-sm font-bold text-success">35%</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+<div class="bg-success h-2 rounded-full" style="width: 35%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Alerts (Bottom Section) -->
+<div class="px-6 py-2 pb-24">
+<h3 class="text-slate-800 dark:text-slate-100 text-lg font-bold mb-4">Cảnh báo gần đây</h3>
+<div class="space-y-3">
+<div class="flex items-start gap-3 p-3 bg-red-50 dark:bg-red-900/10 border-l-4 border-danger rounded-r-lg">
+<span class="material-symbols-outlined text-danger mt-0.5">warning</span>
+<div>
+<p class="text-sm font-bold text-slate-800 dark:text-slate-200">Đường huyết tăng đột biến</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">2 giờ trước • Hãy kiểm tra lại chế độ ăn</p>
+</div>
+</div>
+<div class="flex items-start gap-3 p-3 bg-blue-50 dark:bg-blue-900/10 border-l-4 border-primary rounded-r-lg">
+<span class="material-symbols-outlined text-primary mt-0.5">medication</span>
+<div>
+<p class="text-sm font-bold text-slate-800 dark:text-slate-200">Đến giờ uống thuốc chiều</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">14:00 • Metformin 500mg</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Action Button -->
+<button class="fixed right-4 bottom-20 z-50 h-14 w-14 bg-primary hover:bg-primary-dark text-white rounded-full shadow-lg shadow-primary/40 flex items-center justify-center transition-all active:scale-95">
+<span class="material-symbols-outlined text-[32px]">add</span>
+</button>
+<!-- Bottom Navigation -->
+<div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-40 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 px-6 pb-6 pt-3">
+<div class="flex justify-between items-end">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-primary group-hover:text-primary-dark transition-colors" style="font-variation-settings: 'FILL' 1">home</span>
+<span class="text-[10px] font-medium text-primary">Trang chủ</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors">monitor_heart</span>
+<span class="text-[10px] font-medium text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300">Sức khỏe</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors">calendar_month</span>
+<span class="text-[10px] font-medium text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300">Lịch</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors">group</span>
+<span class="text-[10px] font-medium text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300">Bác sĩ</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors">settings</span>
+<span class="text-[10px] font-medium text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300">Cài đặt</span>
+</a>
+</div>
+</div>
+</div>
+</body></html>

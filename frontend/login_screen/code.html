@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DiabetesGuard Login</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+            extend: {
+                colors: {
+                "primary": "#2e87ad",
+                "background-light": "#F8FAFC",
+                "background-dark": "#131b1f",
+                },
+                fontFamily: {
+                "display": ["Lexend", "sans-serif"]
+                },
+                borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+            },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased min-h-screen flex flex-col items-center justify-center p-4">
+<!-- Main Card Container -->
+<div class="w-full max-w-[420px] bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden relative flex flex-col">
+<!-- Header / Logo Area -->
+<div class="pt-8 pb-4 flex flex-col items-center">
+<div class="size-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 text-primary">
+<span class="material-symbols-outlined !text-4xl">monitor_heart</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-2xl font-bold tracking-tight mb-2">Chào mừng trở lại</h2>
+<p class="text-slate-500 dark:text-slate-400 text-lg text-center px-6">Đăng nhập để theo dõi sức khỏe</p>
+</div>
+<!-- Role Selection Tabs -->
+<div class="px-6 mb-6">
+<div class="bg-slate-100 dark:bg-slate-700 p-1 rounded-lg flex">
+<button class="flex-1 py-2 px-4 rounded-md text-sm font-medium bg-white dark:bg-slate-600 text-primary shadow-sm transition-all text-center">
+                    Bệnh nhân
+                </button>
+<button class="flex-1 py-2 px-4 rounded-md text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-all text-center">
+                    Bác sĩ
+                </button>
+</div>
+</div>
+<!-- Login Form -->
+<div class="px-6 pb-8 flex flex-col gap-5">
+<!-- Email Input -->
+<label class="flex flex-col gap-2">
+<span class="text-slate-700 dark:text-slate-300 font-medium text-base">Email</span>
+<div class="relative flex items-center">
+<div class="absolute left-4 text-slate-400 pointer-events-none flex items-center">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<input class="w-full pl-12 pr-4 py-4 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700/50 text-slate-900 dark:text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors text-lg" placeholder="nhập email của bạn" type="email"/>
+</div>
+</label>
+<!-- Password Input -->
+<label class="flex flex-col gap-2">
+<span class="text-slate-700 dark:text-slate-300 font-medium text-base">Mật khẩu</span>
+<div class="relative flex items-center">
+<div class="absolute left-4 text-slate-400 pointer-events-none flex items-center">
+<span class="material-symbols-outlined">lock</span>
+</div>
+<input class="w-full pl-12 pr-12 py-4 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700/50 text-slate-900 dark:text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors text-lg" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 flex items-center">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</label>
+<!-- Forgot Password -->
+<div class="flex justify-end">
+<a class="text-primary hover:text-primary/80 font-medium text-base" href="#">Quên mật khẩu?</a>
+</div>
+<!-- Login Button -->
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold text-xl py-4 rounded-xl shadow-md transition-transform active:scale-[0.98] flex items-center justify-center gap-2 mt-2">
+<span>Đăng nhập</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<!-- Divider -->
+<div class="relative flex py-2 items-center">
+<div class="flex-grow border-t border-slate-200 dark:border-slate-600"></div>
+<span class="flex-shrink-0 mx-4 text-slate-400 dark:text-slate-500 text-sm">hoặc</span>
+<div class="flex-grow border-t border-slate-200 dark:border-slate-600"></div>
+</div>
+<!-- Register Button -->
+<button class="w-full bg-transparent border-2 border-primary text-primary hover:bg-primary/5 font-bold text-lg py-3 rounded-xl transition-colors">
+                Đăng ký tài khoản mới
+            </button>
+</div>
+</div>
+<!-- Footer info for context -->
+<p class="mt-6 text-slate-400 text-sm text-center max-w-xs">
+        Hỗ trợ kỹ thuật: 1900 1234
+    </p>
+</body></html>
