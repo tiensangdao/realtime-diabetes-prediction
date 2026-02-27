@@ -1,0 +1,141 @@
+version: "3.8"
+
+# Hệ thống dự đoán biến chứng tiểu đường — toàn bộ stack
+
+services:
+
+  # ─── Database ──────────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:15
+    container_name: diabetes_postgres
+    environment:
+      POSTGRES_DB: diabetes_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d diabetes_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: diabetes_redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ─── Auth Service ──────────────────────────────────────────────────────────
+  auth-service:
+    build:
+      context: .
+      dockerfile: auth_service/Dockerfile
+    container_name: diabetes_auth
+    environment:
+      DATABASE_URL: postgresql://admin:secret@postgres:5432/diabetes_db
+      JWT_SECRET: ${JWT_SECRET:-change-this-in-production-use-a-long-random-string}
+      JWT_EXPIRE_MINUTES: ${JWT_EXPIRE_MINUTES:-1440}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    volumes:
+      - ./auth_service:/app/auth_service:ro
+
+  # ─── Health Service ────────────────────────────────────────────────────────
+  health-service:
+    build:
+      context: .
+      dockerfile: health_service/Dockerfile
+    container_name: diabetes_health
+    environment:
+      DATABASE_URL: postgresql://admin:secret@postgres:5432/diabetes_db
+      REDIS_URL: redis://redis:6379/0
+      JWT_SECRET: ${JWT_SECRET:-change-this-in-production-use-a-long-random-string}
+      ML_SERVICE_URL: http://ml-service:8002
+      FIREBASE_CREDENTIALS: ${FIREBASE_CREDENTIALS:-}
+    ports:
+      - "8001:8001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    volumes:
+      - ./health_service:/app/health_service:ro
+
+  # ─── ML Service ────────────────────────────────────────────────────────────
+  ml-service:
+    build:
+      context: .
+      dockerfile: ml_service/Dockerfile
+    container_name: diabetes_ml
+    environment:
+      DATABASE_URL: postgresql://admin:secret@postgres:5432/diabetes_db
+      JWT_SECRET: ${JWT_SECRET:-change-this-in-production-use-a-long-random-string}
+    ports:
+      - "8002:8002"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    volumes:
+      - ./ml_service:/app/ml_service:ro
+      - ml_models:/app/ml_service/models
+    deploy:
+      resources:
+        limits:
+          memory: 2G    # ML cần nhiều RAM cho TensorFlow
+
+  # ─── Celery Worker ─────────────────────────────────────────────────────────
+  celery-worker:
+    build:
+      context: .
+      dockerfile: health_service/Dockerfile
+    container_name: diabetes_celery
+    command: celery -A health_service.tasks.celery_app worker --loglevel=info --concurrency=2
+    environment:
+      DATABASE_URL: postgresql://admin:secret@postgres:5432/diabetes_db
+      REDIS_URL: redis://redis:6379/0
+      FIREBASE_CREDENTIALS: ${FIREBASE_CREDENTIALS:-}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    volumes:
+      - ./health_service:/app/health_service:ro
+
+  # ─── API Gateway ───────────────────────────────────────────────────────────
+  nginx:
+    image: nginx:alpine
+    container_name: diabetes_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - auth-service
+      - health-service
+      - ml-service
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+  ml_models:
+    driver: local

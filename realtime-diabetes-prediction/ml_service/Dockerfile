@@ -1,0 +1,19 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+# TensorFlow cần nhiều RAM khi build — tăng timeout
+RUN pip install --no-cache-dir --timeout=120 -r requirements.txt
+
+COPY . .
+
+# Tạo thư mục models
+RUN mkdir -p /app/ml_service/models
+
+CMD ["uvicorn", "ml_service.main:app", "--host", "0.0.0.0", "--port", "8002"]
