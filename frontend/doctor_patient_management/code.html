@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DiabetesGuard - Doctor Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2e87ad",
+                        "primary-content": "#ffffff",
+                        "primary-dark": "#236a88",
+                        "primary-light": "#d8ebf3",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#131b1f",
+                        "status-high": "#e73508",
+                        "status-warning": "#f59e0b",
+                        "status-stable": "#078836",
+                        "status-info": "#2e87ad",
+                    },
+                    fontFamily: {
+                        display: ["Lexend", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        lg: "1rem",
+                        xl: "1.5rem",
+                        full: "9999px",
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Main Content Area -->
+<div class="flex-1 overflow-y-auto pb-24">
+<!-- Header Section -->
+<div class="bg-white dark:bg-[#1e2a30] px-4 pt-6 pb-4 sticky top-0 z-10 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 ring-2 ring-primary/20" data-alt="Doctor profile portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAJPaU2aQVeIh8lJ9XO052PpN02GKpkrvX3yasgSX5rtdLzS-7BtRFARBj5S1qhE7Moopik7_3Gh9Ew88Id6u98ufZQTpZSm2PKpX0gaU3_YBYQWqtnXM_cnSkPuk8aeFID7NwCp7kNXfZeVMN-icrKFbOY4WKiMdqRqObNI1PDh7ugLLTj_B6YqtP-VlzgsNUW4UtTDPbcRQYsrkwrI5dI20t_u1CZuLMgoa5Q7T_DRFfyUYf2tfPTZurQaIXSEeJa1Rm5ItBkNfg");'></div>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-status-stable rounded-full border-2 border-white dark:border-[#1e2a30]"></div>
+</div>
+<div>
+<p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Chào buổi sáng,</p>
+<h1 class="text-sm font-bold text-slate-900 dark:text-white">Bs. Nguyễn Văn A</h1>
+</div>
+</div>
+<button class="flex items-center justify-center size-10 rounded-full bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 relative hover:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined" style="font-size: 24px;">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-status-high rounded-full"></span>
+</button>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white leading-tight">Bảng điều khiển</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-1">12 bệnh nhân đang theo dõi</p>
+</div>
+<button class="bg-primary/10 text-primary hover:bg-primary/20 p-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined" style="font-size: 20px;">search</span>
+</button>
+</div>
+</div>
+<!-- Summary Stats Grid -->
+<div class="px-4 py-4 grid grid-cols-2 gap-3">
+<!-- High Risk Card -->
+<div class="bg-white dark:bg-[#1e2a30] p-4 rounded-xl shadow-sm border-l-4 border-status-high relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-status-high" style="font-size: 48px;">warning</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium mb-1">Nguy cơ cao</p>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-bold text-slate-900 dark:text-white">3</span>
+<span class="text-xs font-medium text-status-high bg-status-high/10 px-1.5 py-0.5 rounded flex items-center mb-1">
+<span class="material-symbols-outlined" style="font-size: 12px;">arrow_upward</span> 1
+                    </span>
+</div>
+</div>
+<!-- Monitoring Card -->
+<div class="bg-white dark:bg-[#1e2a30] p-4 rounded-xl shadow-sm border-l-4 border-status-warning relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-status-warning" style="font-size: 48px;">visibility</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium mb-1">Cần theo dõi</p>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-bold text-slate-900 dark:text-white">4</span>
+<span class="text-xs font-medium text-slate-400 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded flex items-center mb-1">
+                        -
+                    </span>
+</div>
+</div>
+<!-- Stable Card -->
+<div class="bg-white dark:bg-[#1e2a30] p-4 rounded-xl shadow-sm border-l-4 border-status-stable relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-status-stable" style="font-size: 48px;">check_circle</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium mb-1">Ổn định</p>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-bold text-slate-900 dark:text-white">5</span>
+<span class="text-xs font-medium text-status-stable bg-status-stable/10 px-1.5 py-0.5 rounded flex items-center mb-1">
+<span class="material-symbols-outlined" style="font-size: 12px;">arrow_downward</span> 1
+                    </span>
+</div>
+</div>
+<!-- Unread Card -->
+<div class="bg-white dark:bg-[#1e2a30] p-4 rounded-xl shadow-sm border-l-4 border-status-info relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-status-info" style="font-size: 48px;">mark_chat_unread</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium mb-1">Tin nhắn mới</p>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-bold text-slate-900 dark:text-white">2</span>
+<span class="text-xs font-medium text-status-info bg-status-info/10 px-1.5 py-0.5 rounded flex items-center mb-1">
+                        +2
+                    </span>
+</div>
+</div>
+</div>
+<!-- Filter Chips -->
+<div class="flex gap-2 overflow-x-auto px-4 pb-4 no-scrollbar">
+<button class="flex items-center gap-1.5 px-4 py-2 bg-slate-800 text-white rounded-full text-xs font-medium whitespace-nowrap shadow-sm">
+<span class="material-symbols-outlined" style="font-size: 16px;">check</span>
+                Tất cả
+            </button>
+<button class="flex items-center gap-1.5 px-4 py-2 bg-white dark:bg-[#1e2a30] border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-full text-xs font-medium whitespace-nowrap shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="w-2 h-2 rounded-full bg-status-high"></span>
+                Nguy cơ cao
+            </button>
+<button class="flex items-center gap-1.5 px-4 py-2 bg-white dark:bg-[#1e2a30] border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-full text-xs font-medium whitespace-nowrap shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="w-2 h-2 rounded-full bg-status-warning"></span>
+                Cần theo dõi
+            </button>
+<button class="flex items-center gap-1.5 px-4 py-2 bg-white dark:bg-[#1e2a30] border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-full text-xs font-medium whitespace-nowrap shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="w-2 h-2 rounded-full bg-status-stable"></span>
+                Ổn định
+            </button>
+</div>
+<!-- Patient List -->
+<div class="px-4 flex flex-col gap-3">
+<h3 class="text-sm font-semibold text-slate-900 dark:text-white mb-1 uppercase tracking-wider text-[11px] opacity-70">Danh sách bệnh nhân</h3>
+<!-- Patient Card 1: High Risk -->
+<div class="bg-white dark:bg-[#1e2a30] p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 active:scale-[0.99] transition-transform">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-3">
+<div class="relative">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-12" data-alt="Elderly asian man portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDc4PlsSMeBoJ4XTiHDCkSzEHnErJeCDUzNP6E71bqSXqaH31LnV8y9a9VTso-pLllb2zdQnNoedPU-Pby3ttr_KEh9CeHaLnpQuj9pIx_szEimUF_DtUkyH8RQwgf5Lh4iAp-rQSKc3XAnYqDWAEnTXRIkOfNxzkE2bsEv9O1mJzGRqo2l23yZD2WtBZszu-nlsXCTOvn-5q4aL_U2cUhC8Ab8rbsKP_5gUQK9Ypr3U17VkObKDuTj8Qt52df9-zQbMs1e6ptWBIY");'></div>
+<div class="absolute -bottom-1 -right-1 bg-status-high text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full border-2 border-white dark:border-[#1e2a30]">CAO</div>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white text-base">Trần Văn Bảy</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">72 tuổi • Type 2</p>
+</div>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-size: 20px;">more_horiz</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-3">
+<div class="bg-red-50 dark:bg-red-900/10 p-2.5 rounded-lg">
+<p class="text-[10px] text-red-600 dark:text-red-400 font-medium uppercase mb-0.5">Glucose</p>
+<div class="flex items-baseline gap-1">
+<span class="text-xl font-bold text-status-high">185</span>
+<span class="text-xs text-red-600 dark:text-red-400 font-medium">mg/dL</span>
+</div>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800 p-2.5 rounded-lg">
+<p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase mb-0.5">HbA1c</p>
+<div class="flex items-baseline gap-1">
+<span class="text-xl font-bold text-slate-700 dark:text-slate-200">8.2</span>
+<span class="text-xs text-slate-500 dark:text-slate-400 font-medium">%</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between text-xs pt-2 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined" style="font-size: 14px;">schedule</span>
+<span>Đo 20 phút trước</span>
+</div>
+<div class="flex items-center gap-1 text-status-high font-medium">
+<span class="material-symbols-outlined" style="font-size: 14px;">trending_up</span>
+<span>Tăng đột biến</span>
+</div>
+</div>
+</div>
+<!-- Patient Card 2: Monitoring -->
+<div class="bg-white dark:bg-[#1e2a30] p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 active:scale-[0.99] transition-transform">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-3">
+<div class="relative">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-12" data-alt="Elderly asian woman portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBymgNPLnyhTcGEGh8A_ZpxU5-K5jgy8bUnTYI1TLI571tP9gW8-JLoVlKW8Ky25i5sjA-MlBRdNY-pyffPla-mEZdWuQbJRJJR0u4GABJmNXQMszEq8qRI_J9QgRnco2HmWjONYdZSaxAmnrAajXnXzzx35jcYdy47xGcXJpCeYvf4uFqtqcfYvqL0qW_xR0g7jpCBRvMZdmYrs5chHJNyCpNtoetBblCZbU1Eg7pzC3FupV3QRJZfr6gXvEetW4QFMGc40GBahe0");'></div>
+<div class="absolute -bottom-1 -right-1 bg-status-warning text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full border-2 border-white dark:border-[#1e2a30]">THEO DÕI</div>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white text-base">Lê Thị Mai</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">68 tuổi • Type 2</p>
+</div>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-size: 20px;">more_horiz</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-3">
+<div class="bg-amber-50 dark:bg-amber-900/10 p-2.5 rounded-lg">
+<p class="text-[10px] text-amber-600 dark:text-amber-400 font-medium uppercase mb-0.5">Glucose</p>
+<div class="flex items-baseline gap-1">
+<span class="text-xl font-bold text-status-warning">142</span>
+<span class="text-xs text-amber-600 dark:text-amber-400 font-medium">mg/dL</span>
+</div>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800 p-2.5 rounded-lg">
+<p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase mb-0.5">HbA1c</p>
+<div class="flex items-baseline gap-1">
+<span class="text-xl font-bold text-slate-700 dark:text-slate-200">7.1</span>
+<span class="text-xs text-slate-500 dark:text-slate-400 font-medium">%</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between text-xs pt-2 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined" style="font-size: 14px;">schedule</span>
+<span>Đo 1 giờ trước</span>
+</div>
+<div class="flex items-center gap-1 text-slate-400 font-medium">
+<span class="material-symbols-outlined" style="font-size: 14px;">remove</span>
+<span>Không đổi</span>
+</div>
+</div>
+</div>
+<!-- Patient Card 3: Stable -->
+<div class="bg-white dark:bg-[#1e2a30] p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 active:scale-[0.99] transition-transform">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-3">
+<div class="relative">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-12" data-alt="Happy elderly man portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDz1zEWUlLT1kn5vJ5FcFzWXArpRPzvUKmDTkp8IWvQrpuGdR5EMmpAPZgdRqrS-Ep3PPMFoZUeoMYqLbrTVt4CPggecB2uKiMS4hpCYMzG26p7XgsThqO2fU9P7V5ld-hbRC0qq9qVYi3CurjGD2MCOlSRa-xp1SdS_qvLEpyjXaSYwGExEnqHVn0fQmI_sC6Y9XceAL8nTB3Pn-y3zYzVe0M-wkx93gN6VbKdIz8D1oWfCOOZwloA5EpbvB-Pp8Q9gmBil84qIKE");'></div>
+<div class="absolute -bottom-1 -right-1 bg-status-stable text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full border-2 border-white dark:border-[#1e2a30]">ỔN ĐỊNH</div>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white text-base">Phạm Văn Hùng</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">75 tuổi • Type 2</p>
+</div>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-size: 20px;">more_horiz</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-3">
+<div class="bg-green-50 dark:bg-green-900/10 p-2.5 rounded-lg">
+<p class="text-[10px] text-green-600 dark:text-green-400 font-medium uppercase mb-0.5">Glucose</p>
+<div class="flex items-baseline gap-1">
+<span class="text-xl font-bold text-status-stable">110</span>
+<span class="text-xs text-green-600 dark:text-green-400 font-medium">mg/dL</span>
+</div>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800 p-2.5 rounded-lg">
+<p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase mb-0.5">HbA1c</p>
+<div class="flex items-baseline gap-1">
+<span class="text-xl font-bold text-slate-700 dark:text-slate-200">6.5</span>
+<span class="text-xs text-slate-500 dark:text-slate-400 font-medium">%</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between text-xs pt-2 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined" style="font-size: 14px;">schedule</span>
+<span>Đo 4 giờ trước</span>
+</div>
+<div class="flex items-center gap-1 text-status-stable font-medium">
+<span class="material-symbols-outlined" style="font-size: 14px;">trending_down</span>
+<span>Đang cải thiện</span>
+</div>
+</div>
+</div>
+<!-- Patient Card 4: Unread/New -->
+<div class="bg-white dark:bg-[#1e2a30] p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 active:scale-[0.99] transition-transform">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-3">
+<div class="relative">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-12" data-alt="Senior woman portrait doctor" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDnt7MTz_B8pKtXOgI3v65xdDAk9wJ2ostklgjV2S7KnUrxWwm4YmBPp-5VRHjj7Yto4ECuAZ7pY6nth82A08f8504rBsawh7A6jeRhDjqw0BMcpnQvGPmxmUa4qy4Q-QC_JKWLLekfL_PmwByeZUH28N2U4CQEOsNsp4ivlcMl1ww6KRwwlIauffti3e2LrfGGTFsjNp39cTSK0lSzY4JyQVLcsLuz3_PUMiKBwsBeXqhef--0MOV2OuezBP63KhVSdii_Un_xghQ");'></div>
+<div class="absolute -bottom-1 -right-1 bg-status-info text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full border-2 border-white dark:border-[#1e2a30]">MỚI</div>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h4 class="font-bold text-slate-900 dark:text-white text-base">Nguyễn Thị Lan</h4>
+<span class="w-2 h-2 rounded-full bg-status-info animate-pulse"></span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400">65 tuổi • Type 1</p>
+</div>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-size: 20px;">more_horiz</span>
+</button>
+</div>
+<div class="bg-primary/5 dark:bg-primary/10 p-3 rounded-lg border border-primary/10 flex gap-3 items-center mb-1">
+<div class="bg-white dark:bg-slate-800 rounded-full p-2 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined" style="font-size: 20px;">description</span>
+</div>
+<div>
+<p class="text-sm font-medium text-slate-900 dark:text-white">Báo cáo tuần mới</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Vừa gửi 15 phút trước</p>
+</div>
+</div>
+</div>
+<!-- Spacer for bottom nav -->
+<div class="h-8"></div>
+</div>
+</div>
+<!-- Bottom Navigation -->
+<div class="fixed bottom-0 w-full bg-white dark:bg-[#1e2a30] border-t border-slate-100 dark:border-slate-800 px-4 pb-6 pt-2 shadow-lg z-50">
+<div class="flex justify-between items-end">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary group" href="#">
+<div class="group-hover:bg-primary/10 rounded-full px-4 py-1 transition-colors">
+<span class="material-symbols-outlined text-primary" style="font-size: 24px;">grid_view</span>
+</div>
+<p class="text-primary text-[10px] font-medium leading-normal tracking-wide">Tổng quan</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors group" href="#">
+<div class="group-hover:bg-primary/10 rounded-full px-4 py-1 transition-colors">
+<span class="material-symbols-outlined" style="font-size: 24px;">group</span>
+</div>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Bệnh nhân</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors group" href="#">
+<div class="group-hover:bg-primary/10 rounded-full px-4 py-1 transition-colors">
+<span class="material-symbols-outlined" style="font-size: 24px;">calendar_month</span>
+</div>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Lịch hẹn</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors group" href="#">
+<div class="group-hover:bg-primary/10 rounded-full px-4 py-1 transition-colors">
+<span class="material-symbols-outlined" style="font-size: 24px;">settings</span>
+</div>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Cài đặt</p>
+</a>
+</div>
+</div>
+</body></html>

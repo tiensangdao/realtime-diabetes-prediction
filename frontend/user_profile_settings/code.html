@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DiabetesGuard - Hồ sơ cá nhân</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2e87ad",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#131b1f",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1e2a30",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased selection:bg-primary/30">
+<div class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto bg-surface-light dark:bg-surface-dark shadow-xl">
+<!-- Header -->
+<div class="sticky top-0 z-10 flex items-center justify-between bg-surface-light/95 dark:bg-surface-dark/95 backdrop-blur-sm px-4 py-3 border-b border-slate-100 dark:border-slate-800">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h2 class="text-lg font-bold tracking-tight text-center flex-1 pr-10">Hồ sơ cá nhân</h2>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 flex flex-col gap-6 p-4 pb-24">
+<!-- User Info -->
+<div class="flex flex-col items-center gap-4 py-4">
+<div class="relative group">
+<div class="w-32 h-32 rounded-full overflow-hidden border-4 border-white dark:border-slate-700 shadow-lg bg-slate-200 dark:bg-slate-700 relative" data-alt="Portrait of elderly patient smiling">
+<!-- Placeholder for Avatar if image fails or is abstract -->
+<div class="absolute inset-0 flex items-center justify-center bg-primary/20 text-primary text-4xl font-bold">NV</div>
+<img alt="Nguyễn Văn A" class="w-full h-full object-cover opacity-100 relative z-10" data-alt="Portrait of elderly Asian man smiling gently" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlAetUeU8cEEjV8lyCGOEN9QSyqY367hRgcooOus2TsAhhtbbqoa55rcmU3BEQq3Qs-3AYIgzFqBrUF3qKS65QguHHnMuqBGJc0oiazLc8V9vH9ukKghtnjS49P4n3-f-iJMd7uB5PUem5QzjnGA6ya2fT1RUM2KkybFucBtZhgvF_KvWWqn1F_M3qboOF-w68-T1vLaCMmirDq2Cuqj3KliQ5OyxdgB4a0dGnidsQGWI9J4ckI_gw8iR5UZbj56oealdBewH4i5E"/>
+</div>
+<button class="absolute bottom-0 right-1 bg-primary text-white p-2 rounded-full shadow-md hover:bg-primary/90 transition-colors flex items-center justify-center border-2 border-white dark:border-surface-dark">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+<div class="text-center">
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white">Nguyễn Văn A</h3>
+<p class="text-slate-500 dark:text-slate-400 mt-1">nguyen.vana@email.com</p>
+</div>
+</div>
+<!-- Medical Info Card -->
+<div class="bg-background-light dark:bg-background-dark rounded-xl p-5 border border-slate-100 dark:border-slate-700/50 shadow-sm">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">medical_information</span>
+<h4 class="text-lg font-bold text-slate-900 dark:text-white">Thông tin y tế</h4>
+</div>
+<div class="grid grid-cols-2 gap-y-4 gap-x-6">
+<div class="flex flex-col gap-1">
+<span class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-medium">Loại bệnh</span>
+<p class="font-semibold text-slate-900 dark:text-slate-100">Tiểu đường T2</p>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-medium">Năm chẩn đoán</span>
+<p class="font-semibold text-slate-900 dark:text-slate-100">2015</p>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-medium">Bác sĩ chính</span>
+<p class="font-semibold text-primary">Dr. Lê Minh</p>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-medium">Mục tiêu Glucose</span>
+<p class="font-semibold text-green-600 dark:text-green-400">80-130 mg/dL</p>
+</div>
+</div>
+</div>
+<!-- Settings List -->
+<div class="flex flex-col gap-2">
+<h4 class="px-2 text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Cài đặt chung</h4>
+<button class="flex items-center gap-4 w-full p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left group">
+<div class="w-10 h-10 rounded-full bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">notifications</span>
+</div>
+<div class="flex-1">
+<p class="font-medium text-slate-900 dark:text-slate-100">Thông báo</p>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</button>
+<button class="flex items-center gap-4 w-full p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left group">
+<div class="w-10 h-10 rounded-full bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">lock_reset</span>
+</div>
+<div class="flex-1">
+<p class="font-medium text-slate-900 dark:text-slate-100">Đổi mật khẩu</p>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</button>
+<button class="flex items-center gap-4 w-full p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left group">
+<div class="w-10 h-10 rounded-full bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center text-orange-600 dark:text-orange-400 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div class="flex-1">
+<p class="font-medium text-slate-900 dark:text-slate-100">Xuất báo cáo PDF</p>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</button>
+<button class="flex items-center gap-4 w-full p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left group">
+<div class="w-10 h-10 rounded-full bg-teal-50 dark:bg-teal-900/20 flex items-center justify-center text-teal-600 dark:text-teal-400 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">devices</span>
+</div>
+<div class="flex-1">
+<p class="font-medium text-slate-900 dark:text-slate-100">Kết nối thiết bị đo</p>
+<p class="text-xs text-slate-500">Bluetooth &amp; IoT</p>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</button>
+<button class="flex items-center gap-4 w-full p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left group">
+<div class="w-10 h-10 rounded-full bg-green-50 dark:bg-green-900/20 flex items-center justify-center text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">help</span>
+</div>
+<div class="flex-1">
+<p class="font-medium text-slate-900 dark:text-slate-100">Hướng dẫn sử dụng</p>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</button>
+<button class="flex items-center gap-4 w-full p-4 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left group">
+<div class="w-10 h-10 rounded-full bg-indigo-50 dark:bg-indigo-900/20 flex items-center justify-center text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">call</span>
+</div>
+<div class="flex-1">
+<p class="font-medium text-slate-900 dark:text-slate-100">Liên hệ bác sĩ</p>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</button>
+</div>
+<!-- Logout Button -->
+<div class="mt-4">
+<button class="w-full py-3.5 px-4 rounded-xl border border-red-200 dark:border-red-900 text-red-600 dark:text-red-400 font-semibold hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+                    Đăng xuất
+                </button>
+<p class="text-center text-xs text-slate-400 mt-4">Phiên bản 2.1.0 (Build 405)</p>
+</div>
+</div>
+<!-- Bottom Navigation -->
+<div class="flex gap-2 border-t border-slate-100 dark:border-slate-800 bg-surface-light dark:bg-surface-dark px-4 pb-6 pt-2 sticky bottom-0 z-20">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400 dark:text-slate-500 hover:text-primary dark:hover:text-primary transition-colors" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined" style="font-size: 28px;">home</span>
+</div>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Trang chủ</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400 dark:text-slate-500 hover:text-primary dark:hover:text-primary transition-colors" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined" style="font-size: 28px;">edit_note</span>
+</div>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Nhật ký</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400 dark:text-slate-500 hover:text-primary dark:hover:text-primary transition-colors" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined" style="font-size: 28px;">stethoscope</span>
+</div>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Bác sĩ</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary dark:text-primary font-semibold" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined fill-current" style="font-size: 28px; font-variation-settings: 'FILL' 1;">person</span>
+</div>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Hồ sơ</p>
+</a>
+</div>
+</div>
+</body></html>
